@@ -25,8 +25,8 @@ jobs:
       run: |
         sudo docker pull sunidhi12/sunidhi_flaskapp:2.0
         sudo docker pull sunidhi12/sunidhi_ngnix:2.0
-        sudo docker run -d sunidhi12/sunidhi_ngnix:2.0
-        sudo docker run -d sunidhi12/sunidhi_ngnix:2.0
+        sudo docker run -p 5000:5000 -d sunidhi12/sunidhi_ngnix:2.0
+        sudo docker run -p 8080:80 -d sunidhi12/sunidhi_ngnix:2.0
         
     - name: test app
       run: |
