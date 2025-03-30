@@ -30,4 +30,4 @@ jobs:
         
     - name: test app
       run: |
-        curl  0.0.0.0:5000        
+        curl  0.0.0.0:8080       
