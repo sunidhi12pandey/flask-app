@@ -1,0 +1,70 @@
+name: this pipeline will host flask app
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-repository
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: |
+          sudo apt update
+          sudo apt install docker-compose curl -y
+          sudo usermod -aG docker $USER
+          newgrp docker
+
+      - name: gcloud auth login
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: configure artifact registry
+        run: |
+          gcloud auth configure-docker ${{ secrets.GCP_ARTIFACT }}
+
+      - name: build
+        run: |
+             sudo docker-compose up --build -d
+      - name: test
+        run: |
+             curl http://127.0.0.1:80
+
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-repository
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: |
+          sudo apt update -y
+          sudo apt install docker-compose curl -y
+          sudo usrmod -aG docker $USER
+          newgrp docker
+
+      - name: gcloud auth login
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: configure artifact registry
+        run: | 
+          gcloud auth configure-dcoker ${{ secrets.GCP_ARTIFACT }}
+
+      - name: build
+        run: |
+             sudo docker-compose up -d
+
+      - name: test
+        run: |
+             curl http://127.0.0.1:80
+
+      - name: push
+        run: |
+             docker tag flask-app_nginx us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-app_nginx:latest
+             docker push us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-app_nginx:tag
+             dcoker tag flask-app_backend us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-app_backend:latest
+             docker push us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-app_backend:latest
+
+          
+            
