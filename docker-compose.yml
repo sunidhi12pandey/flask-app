@@ -13,7 +13,7 @@ services:
       context: ./nginx
     container_name: nginx-webserver
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - backend  # Ensure backend starts before nginx
     networks:
