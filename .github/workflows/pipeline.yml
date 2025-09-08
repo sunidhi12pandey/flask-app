@@ -47,7 +47,7 @@ jobs:
 
       - name: configure artifact registry
         run: | 
-          gcloud auth configure-dcoker ${{ secrets.GCP_ARTIFACT }}
+          gcloud auth configure-docker ${{ secrets.GCP_ARTIFACT }}
 
       - name: build
         run: |
