@@ -25,7 +25,7 @@ jobs:
 
       - name: build
         run: |
-           docker compose build --parallel
+           docker-compose up -d
 
   push:
     needs: build
@@ -51,7 +51,7 @@ jobs:
 
       - name: build
         run: |
-             sudo docker-compose --build -d
+          docker compose build --parallel
 
       - name: push
         run: |
