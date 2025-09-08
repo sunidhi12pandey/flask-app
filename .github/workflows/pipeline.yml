@@ -11,7 +11,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install docker-compose curl -y
-          sudo usrmod -aG docker $USER
+          sudo usermod -aG docker $USER
           newgrp docker
 
       - name: gcloud auth login
@@ -28,6 +28,7 @@ jobs:
              sudo docker-compose up --build -d
 
   push:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: checkout-repository
@@ -36,7 +37,7 @@ jobs:
         run: |
           sudo apt update -y
           sudo apt install docker-compose curl -y
-          sudo usrmod -aG docker $USER
+          sudo usermod -aG docker $USER
           newgrp docker
 
       - name: gcloud auth login
@@ -50,7 +51,7 @@ jobs:
 
       - name: build
         run: |
-             sudo docker-compose up -d
+             sudo docker-compose --build -d
 
       - name: push
         run: |
