@@ -57,7 +57,7 @@ jobs:
         run: |
              docker tag flask-app_nginx us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-nginx:latest
              docker push us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-nginx:latest
-             dcoker tag flask-app_backend us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-backend:latest
+             docker tag flask-app_backend us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-backend:latest
              docker push us-central1-docker.pkg.dev/inspired-alcove-470811-f5/my-repo/flask-backend:latest
 
           
