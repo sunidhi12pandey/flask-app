@@ -51,7 +51,7 @@ jobs:
 
       - name: build
         run: |
-          docker compose build --parallel
+          docker compose up -d
 
       - name: push
         run: |
