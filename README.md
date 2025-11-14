@@ -5,7 +5,7 @@ A multi-layer Docker application consisting of a **Flask backend** and an **NGIN
 
 ---
 
-## **Table of Contents**
+## ***Table of Contents***
 
 1. [Project Overview](#project-overview)
 2. [Technologies Used](#technologies-used)
